@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="button" id="sample" value="今の状態を送信する">
+
+    <script>
+        var sock = new WebSocket('ws://127.0.0.1:8021');
+
+        // 接続
+        sock.addEventListener('open',function(e){
+            console.log('Socket 接続成功');
+        });
+
+        // サーバーからデータを受け取る
+        sock.addEventListener('message',function(e){
+            console.log(e.data);
+        });
+
+        document.addEventListener('DOMContentLoaded',function(e){
+            // サーバーにデータを送る
+            document.getElementById('sample').addEventListener('click',function(e){
+              const data = {
+                type: 'post-status',
+                payload: {
+                  user_id: 3,
+                  project_id: 1,
+                  status_no: 3,
+                  message_content: null
+                }
+              }
+              console.log("😃", JSON.stringify(data))
+              sock.send(JSON.stringify(data));
+            });
+        });
+    </script>
+</body>
+</html>

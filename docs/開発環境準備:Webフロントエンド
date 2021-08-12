@@ -1,0 +1,22 @@
+# 開発環境準備:Webフロントエンド
+・全コンテナを起動する
+docker-compose up -d
+・webコンテナに入る
+docker-compose exec microsoftteams-api bash
+
+※必要に応じて各コンテナに入りAPIサーバを起動する（API利用部分の動確時など）
+※サーバ起動手順については、同フォルダにある各開発環境準備ドキュメントに記載
+
+-- コンテナ内操作 --
+・依存パッケージをインストールする（初回と他メンバがpackage.jsonを更新した場合に随時）
+npm install
+・Webサーバを起動する（API動作確認時）
+npm run dev
+・コンテナを抜ける（コンテナ再起動時、作業終了時）
+exit
+------------------
+・コンテナを停止する（コンテナ再起動時、作業終了時）
+docker-compose down
+
+# 参考
+https://qiita.com/A-Kira/items/ed12de84dda0230a4eae
